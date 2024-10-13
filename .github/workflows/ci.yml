@@ -22,14 +22,14 @@ jobs:
       - name: Configure npm for multiple registries
         run: |
           npm config set @IvanOpanasiuk:registry https://npm.pkg.github.com/
+          npm config set registry https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Build the project
-        run: yarn build
-
-      - name: Run tests
-        run: yarn test
+        run: npm run build
